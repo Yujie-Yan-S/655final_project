@@ -5,25 +5,40 @@
     height="100%"
     width="100%"
   >
-    <v-sheet
-      id="uploadImg"
-      class="d-flex flex-column"
-      rounded
-      elevation="2"
-      height="30%"
-      width="35%"
-    >
-      <!--      <v-file-input-->
-      <!--        ref="fileId"-->
-      <!--        v-model="file"-->
-      <!--        truncate-length="15"-->
-      <!--        @change="uploadImg()"-->
-      <!--      ></v-file-input>-->
+    <input
+      id="input_box"
+      ref="Input"
+      type="file"
+      accept="image/png"
+      @change="uploadImg($event)"
+    />
+    <v-card id="card" width="25vw" height="50vh" elevation="3" color="#ebebeb">
+      <v-img contain width="100%" height="70%" :src="url"></v-img>
 
-      <!--      <v-sheet color="red">-->
-      <!--        {{ outdata }}-->
-      <!--      </v-sheet>-->
-    </v-sheet>
+      <v-card-title>{{ result }}</v-card-title>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <v-sheet
+        id="uploadImg"
+        class="d-flex flex-column"
+        rounded
+        height="150px"
+        @click="handleClick()"
+      >
+        <v-hover v-slot="{ hover }">
+          <v-sheet
+            class="d-flex align-center justify-center"
+            :elevation="hover ? 12 : 3"
+            width="100%"
+            height="100%"
+            ><v-icon class="" size="130px">
+              mdi-plus-circle-outline
+            </v-icon></v-sheet
+          >
+        </v-hover>
+      </v-sheet>
+    </v-card>
   </v-sheet>
 </template>
 
@@ -36,11 +51,18 @@ export default {
     return {
       file: null,
       data: null,
-      outdata: 123,
+      outdata: null,
+      result: "No Result",
+      url: require("../../resource/no_pic.png"),
     };
   },
   methods: {
-    uploadImg: function () {
+    handleClick: function () {
+      this.$refs.Input.click();
+    },
+    uploadImg: function (e) {
+      console.log(e);
+      this.file = e.target.files[0];
       var reader = new FileReader();
       let formData = new FormData();
       reader.readAsDataURL(this.file);
@@ -48,10 +70,20 @@ export default {
         this.data = reader.result;
         formData.append("file", this.data);
         this.outdata = formData.get("file");
+        this.url = this.outdata;
+        //socket
+        //socket
       };
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#input_box {
+  display: none;
+}
+#card {
+  margin-top: -300px;
+}
+</style>
