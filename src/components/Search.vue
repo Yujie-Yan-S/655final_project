@@ -23,7 +23,7 @@
         id="uploadImg"
         class="d-flex flex-column"
         rounded
-        height="150px"
+        height="30%"
         @click="handleClick()"
       >
         <v-hover v-slot="{ hover }">
@@ -32,7 +32,7 @@
             :elevation="hover ? 12 : 3"
             width="100%"
             height="100%"
-            ><v-icon class="" size="130px">
+            ><v-icon id="icon" size="100px">
               mdi-plus-circle-outline
             </v-icon></v-sheet
           >
@@ -85,5 +85,19 @@ export default {
 }
 #card {
   margin-top: -300px;
+}
+@media (max-width: 1200px) {
+  #card {
+    height: 77vh !important;
+    width: 44vw !important;
+    margin-top: -100px;
+  }
+}
+@media (max-width: 500px) {
+  #card {
+    height: 100vh !important;
+    width: 100vw !important;
+    margin-top: 0;
+  }
 }
 </style>
