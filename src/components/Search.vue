@@ -71,6 +71,7 @@ export default {
         formData.append("file", this.data);
         this.outdata = formData.get("file");
         this.url = this.outdata;
+        alert(this.data);
         //socket
         //socket
       };
