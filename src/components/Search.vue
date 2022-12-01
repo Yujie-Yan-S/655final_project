@@ -86,7 +86,7 @@ export default {
         socket.onmessage = function (event) {
           var data = event.data;
           console.log(data);
-          that.res = data;
+          that.result = data;
           socket.close();
           // 处理数据
         };
