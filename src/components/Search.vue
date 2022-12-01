@@ -72,7 +72,23 @@ export default {
         this.outdata = formData.get("file");
         this.url = this.outdata;
         //socket
+        console.log(typeof this.url);
+
         //socket
+        let socket = new WebSocket("ws://localhost:9001");
+        let that = this;
+        socket.onopen = function () {
+          console.log("Connection open ...");
+          console.log(that);
+          socket.send(that.url);
+        };
+        socket.onmessage = function (event) {
+          var data = event.data;
+          console.log(data);
+          that.res = data;
+          socket.close();
+          // 处理数据
+        };
       };
     },
   },
