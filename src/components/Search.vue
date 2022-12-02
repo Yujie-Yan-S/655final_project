@@ -71,12 +71,12 @@ export default {
         formData.append("file", this.data);
         this.outdata = formData.get("file");
         this.url = this.outdata;
-        alert(this.data);
+        // alert(this.data);
         //socket
-        console.log(typeof this.url);
+        // console.log(typeof this.url);
 
         //socket
-        let socket = new WebSocket("ws://localhost:9001");
+        let socket = new WebSocket("ws://172.17.4.2:9001");
         let that = this;
         socket.onopen = function () {
           console.log("Connection open ...");
@@ -103,14 +103,14 @@ export default {
 #card {
   margin-top: -300px;
 }
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
   #card {
     height: 77vh !important;
     width: 44vw !important;
     margin-top: -100px;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   #card {
     height: 100vh !important;
     width: 100vw !important;
