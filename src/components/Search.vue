@@ -61,7 +61,6 @@ export default {
       this.$refs.Input.click();
     },
     uploadImg: function (e) {
-      console.log(e);
       this.file = e.target.files[0];
       var reader = new FileReader();
       let formData = new FormData();
@@ -76,11 +75,12 @@ export default {
         // console.log(typeof this.url);
 
         //socket
-        let socket = new WebSocket("ws://172.17.4.2:9001");
+        let socket = new WebSocket("ws://104.243.16.203:12345");
         let that = this;
         socket.onopen = function () {
           console.log("Connection open ...");
-          console.log(that);
+          // console.log(that);
+          console.log("socket is connected");
           socket.send(that.url);
         };
         socket.onmessage = function (event) {
