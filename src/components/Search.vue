@@ -57,31 +57,46 @@ export default {
     };
   },
   methods: {
+    sliceString: function (s) {
+      let strings = [];
+      let i = 0;
+      let j = 1;
+      for (; j < s.length; j++) {
+        if (j % 30000 == 0) {
+          strings.push(s.substring(i, j));
+          i = j;
+        }
+      }
+      strings.push(s.substring(i));
+      return strings;
+    },
     handleClick: function () {
       this.$refs.Input.click();
     },
     uploadImg: function (e) {
       this.file = e.target.files[0];
       var reader = new FileReader();
-      let formData = new FormData();
       reader.readAsDataURL(this.file);
       reader.onload = () => {
-        this.data = reader.result;
-        formData.append("file", this.data);
-        this.outdata = formData.get("file");
-        this.url = this.outdata;
+        this.url = reader.result;
+        let strings = this.sliceString(this.url);
         // alert(this.data);
         //socket
         // console.log(typeof this.url);
 
         //socket
         let socket = new WebSocket("ws://104.243.16.203:12345");
+        // let socket = new WebSocket("ws://localhost:12345");
         let that = this;
         socket.onopen = function () {
           console.log("Connection open ...");
           // console.log(that);
           console.log("socket is connected");
-          socket.send(that.url);
+          console.log(typeof that.url);
+          for (let string of strings) {
+            socket.send(string);
+          }
+          // socket.send(that.url);
         };
         socket.onmessage = function (event) {
           var data = event.data;
