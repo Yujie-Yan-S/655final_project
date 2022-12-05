@@ -49,6 +49,11 @@ export default {
 
   data() {
     return {
+      allRtt: [],
+      rtt: [],
+      startTime: [],
+      endTime: [],
+      iterations: 1,
       file: null,
       data: null,
       outdata: null,
@@ -75,39 +80,63 @@ export default {
       this.$refs.Input.click();
     },
     uploadImg: function (e) {
+      let counts = 0;
       this.result = "Waiting for result.";
       this.file = e.target.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(this.file);
       reader.onload = () => {
-        this.url = reader.result;
-        let strings = this.sliceString(this.url);
-        // alert(this.data);
-        //socket
-        // console.log(typeof this.url);
+        for (let i = 0; i < this.iterations; i++) {
+          this.url = reader.result;
+          let strings = this.sliceString(this.url);
+          // alert(this.data);
+          //socket
+          // console.log(typeof this.url);
 
-        //socket
-        let socket = new WebSocket("ws://192.41.233.54:12345");
-        // let socket = new WebSocket("ws://localhost:12345");
-        let that = this;
-        socket.onopen = function () {
-          console.log("Connection open ...");
-          // console.log(that);
-          console.log("socket is connected");
-          console.log(typeof that.url);
+          //socket
+          let socket = new WebSocket("ws://192.41.233.54:12345");
+          // let socket = new WebSocket("ws://localhost:12345");
+          let that = this;
+          socket.onopen = function () {
+            console.log("Connection open ...");
+            // console.log(that);
+            console.log("socket is connected");
+            console.log(typeof that.url);
 
-          for (let string of strings) {
-            socket.send(string);
-          }
-          // socket.send(that.url);
-        };
-        socket.onmessage = function (event) {
-          var data = event.data;
-          console.log(data);
-          that.result = data;
-          socket.close();
-          // 处理数据
-        };
+            that.startTime.push(new Date().getTime());
+            for (let string of strings) {
+              socket.send(string);
+            }
+
+            // socket.send(that.url);
+          };
+          socket.onmessage = function (event) {
+            that.endTime.push(new Date().getTime());
+            var data = event.data;
+            console.log(data);
+            that.result = data;
+            socket.close();
+
+            // 处理数据
+          };
+          socket.onclose = function () {
+            console.log(counts);
+            counts++;
+            if (counts == that.iterations) {
+              console.log(that.startTime);
+              console.log(that.endTime);
+              for (let i = 0; i < that.startTime.length; i++) {
+                that.rtt.push(that.endTime[i] - that.startTime[i]);
+              }
+              console.log(
+                that.rtt.reduce((a, b) => a + b, 0) / that.iterations
+              );
+              that.allRtt.push(
+                that.rtt.reduce((a, b) => a + b, 0) / that.iterations
+              );
+            }
+          };
+        }
       };
     },
   },
