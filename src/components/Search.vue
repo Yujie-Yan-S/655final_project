@@ -85,7 +85,7 @@ export default {
         // console.log(typeof this.url);
 
         //socket
-        let socket = new WebSocket("ws://104.243.16.203:12345");
+        let socket = new WebSocket("ws://192.41.233.54:12345");
         // let socket = new WebSocket("ws://localhost:12345");
         let that = this;
         socket.onopen = function () {
@@ -93,6 +93,7 @@ export default {
           // console.log(that);
           console.log("socket is connected");
           console.log(typeof that.url);
+          that.result = "Waiting for result.";
           for (let string of strings) {
             socket.send(string);
           }
