@@ -74,7 +74,7 @@ export default {
       this.$refs.Input.click();
     },
     uploadImg: function (e) {
-      that.result = "Waiting for result.";
+      this.result = "Waiting for result.";
       this.file = e.target.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(this.file);
