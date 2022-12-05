@@ -74,6 +74,7 @@ export default {
       this.$refs.Input.click();
     },
     uploadImg: function (e) {
+      that.result = "Waiting for result.";
       this.file = e.target.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(this.file);
@@ -93,7 +94,7 @@ export default {
           // console.log(that);
           console.log("socket is connected");
           console.log(typeof that.url);
-          that.result = "Waiting for result.";
+
           for (let string of strings) {
             socket.send(string);
           }
