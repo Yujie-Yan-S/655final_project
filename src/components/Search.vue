@@ -68,6 +68,7 @@ export default {
         }
       }
       strings.push(s.substring(i));
+      strings.push("\n");
       return strings;
     },
     handleClick: function () {

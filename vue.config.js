@@ -8,14 +8,14 @@
  * @type {import('@vue/cli-service').ProjectOptions}
  */
 module.exports = {
-    configureWebpack: {},
+  configureWebpack: {},
 
-    devServer: {
-        port: "8080",
-        // host: "192.41.233.62",
-        host: "0.0.0.0",
-        hot: true,
-    },
+  devServer: {
+    port: "8080",
+    host: "192.41.233.62",
+    // host: "0.0.0.0",
+    hot: true,
+  },
 
-    transpileDependencies: ["vuetify"],
+  transpileDependencies: ["vuetify"],
 };
