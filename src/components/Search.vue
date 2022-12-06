@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    class="d-flex justify-center align-center"
+    class="d-flex flex-column justify-center align-center"
     color="white"
     height="100%"
     width="100%"
@@ -39,6 +39,22 @@
         </v-hover>
       </v-sheet>
     </v-card>
+    <v-sheet
+      class="mt-16 d-flex justify-center align-center flex-column"
+      height="200px"
+      width="50vw"
+    >
+      <v-sheet class="mt-10 text-h5">
+        Enter the iterations to simulate the parallel requests sending.
+      </v-sheet>
+      <v-text-field
+        v-model="iterations"
+        class="mt-5"
+        label="Filled"
+        placeholder="Enter the iterations"
+        filled
+      ></v-text-field>
+    </v-sheet>
   </v-sheet>
 </template>
 
@@ -49,7 +65,6 @@ export default {
 
   data() {
     return {
-      allRtt: [],
       rtt: [],
       startTime: [],
       endTime: [],
@@ -62,6 +77,11 @@ export default {
     };
   },
   methods: {
+    /**
+     * slice the string to send in fragments to prevent the broken pipe
+     * @param s
+     * @returns {*[]}
+     */
     sliceString: function (s) {
       let strings = [];
       let i = 0;
@@ -76,9 +96,16 @@ export default {
       strings.push("\n");
       return strings;
     },
+    /**
+     * handle click for the button to take the input
+     */
     handleClick: function () {
       this.$refs.Input.click();
     },
+    /**
+     * upload the image to the load balance server
+     * @param e
+     */
     uploadImg: function (e) {
       let counts = 0;
       this.result = "Waiting for result.";
@@ -116,12 +143,11 @@ export default {
             console.log(data);
             that.result = data;
             socket.close();
-
-            // 处理数据
           };
           socket.onclose = function () {
             console.log(counts);
             counts++;
+            //check if it is last iteration
             if (counts == that.iterations) {
               console.log(that.startTime);
               console.log(that.endTime);
@@ -129,9 +155,6 @@ export default {
                 that.rtt.push(that.endTime[i] - that.startTime[i]);
               }
               console.log(
-                that.rtt.reduce((a, b) => a + b, 0) / that.iterations
-              );
-              that.allRtt.push(
                 that.rtt.reduce((a, b) => a + b, 0) / that.iterations
               );
             }
@@ -148,16 +171,16 @@ export default {
   display: none;
 }
 #card {
-  margin-top: -300px;
+  margin-top: -100px;
 }
-@media (max-width: 1500px) {
+@media (max-width: 1500px) or (max-height: 600px) {
   #card {
     height: 77vh !important;
     width: 44vw !important;
     margin-top: -100px;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 700px) or (max-height: 300px) {
   #card {
     height: 100vh !important;
     width: 100vw !important;
