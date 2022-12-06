@@ -40,11 +40,11 @@
       </v-sheet>
     </v-card>
     <v-sheet
-      class="mt-16 d-flex justify-center align-center flex-column"
+      class="pt-16 d-flex justify-center align-center flex-column"
       height="200px"
       width="50vw"
     >
-      <v-sheet class="mt-16 text-h5">
+      <v-sheet class="mt-5 text-h5">
         Enter the iterations to simulate the parallel requests sending.
       </v-sheet>
       <v-text-field
@@ -170,21 +170,16 @@ export default {
 #input_box {
   display: none;
 }
-#card {
-  margin-top: -100px;
-}
 @media (max-width: 1500px) {
   #card {
     height: 77vh !important;
     width: 44vw !important;
-    margin-top: -100px;
   }
 }
 @media (max-width: 700px) {
   #card {
     height: 100vh !important;
     width: 100vw !important;
-    margin-top: 0;
   }
 }
 </style>
