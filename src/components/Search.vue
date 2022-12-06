@@ -9,7 +9,7 @@
       id="input_box"
       ref="Input"
       type="file"
-      accept="image/png"
+      accept="image"
       @change="uploadImg($event)"
     />
     <v-card id="card" width="25vw" height="50vh" elevation="3" color="#ebebeb">
