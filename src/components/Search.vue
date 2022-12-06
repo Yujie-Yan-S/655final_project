@@ -28,7 +28,7 @@
       >
         <v-hover v-slot="{ hover }">
           <v-sheet
-            class="d-flex align-center justify-center"
+            class="mb-12 d-flex align-center justify-center"
             :elevation="hover ? 12 : 3"
             width="100%"
             height="100%"
@@ -44,7 +44,7 @@
       height="200px"
       width="50vw"
     >
-      <v-sheet class="mt-10 text-h5">
+      <v-sheet class="mt-16 text-h5">
         Enter the iterations to simulate the parallel requests sending.
       </v-sheet>
       <v-text-field
@@ -173,14 +173,14 @@ export default {
 #card {
   margin-top: -100px;
 }
-@media (max-width: 1500px) or (max-height: 600px) {
+@media (max-width: 1500px) {
   #card {
     height: 77vh !important;
     width: 44vw !important;
     margin-top: -100px;
   }
 }
-@media (max-width: 700px) or (max-height: 300px) {
+@media (max-width: 700px) {
   #card {
     height: 100vh !important;
     width: 100vw !important;
