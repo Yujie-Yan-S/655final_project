@@ -31,7 +31,7 @@
 ```
 git clone https://github.com/Yujie-Yan-S/655final_project.git
 cd 655final_project/
-setup.sh
+./setup.sh
 
 ```
 
