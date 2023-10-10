@@ -1,3 +1,7 @@
+![Image text](https://github.com/Yujie-Yan-S/655final_project/blob/bb253b020923549c7ea249c4afad525dd399f2ba/public/655_Report-1.jpg)
+![Image text](https://github.com/Yujie-Yan-S/655final_project/blob/bb253b020923549c7ea249c4afad525dd399f2ba/public/655_Report-2.jpg)
+![Image text](https://github.com/Yujie-Yan-S/655final_project/blob/bb253b020923549c7ea249c4afad525dd399f2ba/public/655_Report-3.jpg)
+![Image text](https://github.com/Yujie-Yan-S/655final_project/blob/bb253b020923549c7ea249c4afad525dd399f2ba/public/655_Report-4.jpg)
 # 655final_project_front end
 
 
